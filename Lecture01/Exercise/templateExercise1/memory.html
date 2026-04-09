@@ -1,21 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Game</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1 class="text-center my-4">Memory Game</h1>
-        <div id="game-board" class="row justify-content-center">
-            <!-- Card elements will go here -->
+      <h1 class="text-center my-4">Memory Game</h1>
+      <div id="game-board" class="row justify-content-center">
+        <!-- Card elements will go here -->
+
+        <!-- 1. Karte mit 🍎 -->
+        <div
+          class="card"
+          onclick="
+            //Wenn die Karten NICHT gesperrt werden,
+            // und diese Karte kein class 'flipped' hat, also noch NICHT aufgedeckt wurde,
+            //und diese Karte die class 'matched' NICHT hat,
+            if (
+              !lock &&
+              !this.classList.contains('flipped') &&
+              !this.classList.contains('matched')
+            ) {
+              this.textContent = '🍎'; // '?' ändert sich zu Apfel
+              this.classList.add('flipped');
+
+              if (!firstCard) {
+                //wenn noch keine Karte aufgedeckt wurde
+                firstCard = this; //Diese Karte ist die erste Karte.
+              } else {
+                secondCard = this;
+                lock = true; //Die alle Karten werden gesperrt.
+
+                //wenn die erste und die zweite Karte die gleiche Inhalte haben,
+                if (firstCard.textContent === secondCard.textContent) {
+                  firstCard.classList.add('matched');
+                  secondCard.classList.add('matched');
+
+                  countPair += 1; // = ein Paar wurde aufgedeckt
+
+                  //wenn zwei Paare aufgedecked wurden,
+                  if (countPair === 2) {
+                    //diese Nachricht wird ausgegeben
+                    document.getElementById('compl-msg').textContent =
+                      'Game Clear!';
+                    //das restart-button wird sichtbar
+                    document
+                      .getElementById('restart-btn')
+                      .classList.remove('invisible');
+                  }
+
+                  //die Variablen initialisieren
+                  firstCard = null;
+                  secondCard = null;
+                  lock = false;
+                } else {
+                  setTimeout(
+                    `
+                    //die Karten und die Variablen nach einer Sekunde initialisieren
+                    firstCard.textContent='?';
+                    secondCard.textContent='?';
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    firstCard=null;
+                    secondCard=null;
+                    lock=false;`,
+                    1000,
+                  );
+                }
+              }
+            }
+          "
+        >
+          ?
         </div>
+
+        <!-- 2. Karte mit 🍎-->
+        <div
+          class="card"
+          onclick="
+            //Wenn noch nicht zwei Karten aufgedeckt wurden
+            // und diese Karte hat kein class 'flipped' = noch nicht aufgedeckt wurde,
+            //und diese Karte hat die class 'matched'
+            if (
+              !lock &&
+              !this.classList.contains('flipped') &&
+              !this.classList.contains('matched')
+            ) {
+              this.textContent = '🍎'; //'?' ändert sich zu Apfel
+              this.classList.add('flipped');
+
+              if (!firstCard) {
+                //wenn noch keine Karte aufgedeckt wurde
+                firstCard = this; //Diese Karte ist die erste Karte.
+              } else {
+                secondCard = this;
+                lock = true; //Die alle Karten werden gesperrt.
+
+                //wenn die erste und die zweite Karte die gleiche Inhalte haben,
+                if (firstCard.textContent === secondCard.textContent) {
+                  firstCard.classList.add('matched');
+                  secondCard.classList.add('matched');
+
+                  countPair += 1; // = ein Paar wurde aufgedeckt
+
+                  //wenn zwei Paare aufgedecked wurden,
+                  if (countPair === 2) {
+                    document.getElementById('compl-msg').textContent =
+                      'Game Clear!';
+                    document
+                      .getElementById('restart-btn')
+                      .classList.remove('invisible');
+                  }
+
+                  //die Variablen initialisieren
+                  firstCard = null;
+                  secondCard = null;
+                  lock = false;
+                } else {
+                  setTimeout(
+                    `
+                    //die Karten und die Variablen initialisieren
+                    firstCard.textContent='?';
+                    secondCard.textContent='?';
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    firstCard=null;
+                    secondCard=null;
+                    lock=false;`,
+                    1000,
+                  );
+                }
+              }
+            }
+          "
+        >
+          ?
+        </div>
+
+        <!-- 3. Karte mit 🍇-->
+        <div
+          class="card"
+          onclick="
+            //Wenn noch nicht zwei Karten aufgedeckt wurden
+            // und diese Karte hat kein class 'flipped' = noch nicht aufgedeckt wurde,
+            //und diese Karte hat die class 'matched'
+            if (
+              !lock &&
+              !this.classList.contains('flipped') &&
+              !this.classList.contains('matched')
+            ) {
+              this.textContent = '🍇'; //'?' ändert sich zu Apfel
+              this.classList.add('flipped');
+
+              if (!firstCard) {
+                //wenn noch keine Karte aufgedeckt wurde
+                firstCard = this; //Diese Karte ist die erste Karte.
+              } else {
+                secondCard = this;
+                lock = true; //Die alle Karten werden gesperrt.
+
+                //wenn die erste und die zweite Karte die gleiche Inhalte haben,
+                if (firstCard.textContent === secondCard.textContent) {
+                  firstCard.classList.add('matched');
+                  secondCard.classList.add('matched');
+
+                  countPair += 1; // = ein Paar wurde aufgedeckt
+
+                  //wenn zwei Paare aufgedecked wurden,
+                  if (countPair === 2) {
+                    document.getElementById('compl-msg').textContent =
+                      'Game Clear!';
+                    document
+                      .getElementById('restart-btn')
+                      .classList.remove('invisible');
+                  }
+
+                  //die Variablen initialisieren
+                  firstCard = null;
+                  secondCard = null;
+                  lock = false;
+                } else {
+                  setTimeout(
+                    `
+                    //die Karten und die Variablen initialisieren
+                    firstCard.textContent='?';
+                    secondCard.textContent='?';
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    firstCard=null;
+                    secondCard=null;
+                    lock=false;`,
+                    1000,
+                  );
+                }
+              }
+            }
+          "
+        >
+          ?
+        </div>
+
+        <!-- 4. Karte mit 🍇-->
+        <div
+          class="card"
+          onclick="
+            //Wenn noch nicht zwei Karten aufgedeckt wurden
+            // und diese Karte hat kein class 'flipped' = noch nicht aufgedeckt wurde,
+            //und diese Karte hat die class 'matched'
+            if (
+              !lock &&
+              !this.classList.contains('flipped') &&
+              !this.classList.contains('matched')
+            ) {
+              this.textContent = '🍇'; //'?' ändert sich zu Apfel
+              this.classList.add('flipped');
+
+              if (!firstCard) {
+                //wenn noch keine Karte aufgedeckt wurde
+                firstCard = this; //Diese Karte ist die erste Karte.
+              } else {
+                secondCard = this;
+                lock = true; //Die alle Karten werden gesperrt.
+
+                //wenn die erste und die zweite Karte die gleiche Inhalte haben,
+                if (firstCard.textContent === secondCard.textContent) {
+                  firstCard.classList.add('matched');
+                  secondCard.classList.add('matched');
+
+                  countPair += 1; // = ein Paar wurde aufgedeckt
+
+                  //wenn zwei Paare aufgedecked wurden,
+                  if (countPair === 2) {
+                    document.getElementById('compl-msg').textContent =
+                      'Game Clear!';
+                    document
+                      .getElementById('restart-btn')
+                      .classList.remove('invisible');
+                  }
+
+                  //die Variablen initialisieren
+                  firstCard = null;
+                  secondCard = null;
+                  lock = false;
+                } else {
+                  setTimeout(
+                    `
+                    //die Karten und die Variablen initialisieren
+                    firstCard.textContent='?';
+                    secondCard.textContent='?';
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    firstCard=null;
+                    secondCard=null;
+                    lock=false;`,
+                    1000,
+                  );
+                }
+              }
+            }
+          "
+        >
+          ?
+        </div>
+      </div>
+
+      <!-- completion message -->
+      <div id="compl-msg" class="text-center mt-3"></div>
+
+      <!-- Reset button-->
+      <div class="text-center mt-3">
+        <button
+          id="restart-btn"
+          class="btn btn-secondary invisible"
+          onclick="location.reload()"
+        >
+          Restart the Game
+        </button>
+      </div>
     </div>
+
     <script>
-        // Place script code here
+      // Place script code here
+      let firstCard = null; //die erste geclickte Karte
+      let secondCard = null; //die zweite geclickte Karte
+      let lock = false; //zum Sperren der Karten
+      let countPair = 0; //zählt, wie viele Paare aufgedeckt wurden
     </script>
-</body>
+  </body>
 </html>

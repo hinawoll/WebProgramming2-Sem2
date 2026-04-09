@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "ES6",
+    "rootDir": "./src",//TypeScript の元ファイルは src に置く
+    "outDir": "./dist",//コンパイル後の JavaScript は dist に出す
+    "strict": true,//型チェックを有効にする
+    "noEmitOnError": true//エラーがあると .js を出さない
+  },
+  "include": ["src/**/*", "script.js"]
+}

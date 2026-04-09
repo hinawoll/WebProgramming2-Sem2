@@ -1,19 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Game</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1 class="text-center my-4">Memory Game</h1>
-        <div id="game-board" class="row justify-content-center">
-            <!-- Card elements will go here -->
-        </div>
+      <h1 class="text-center my-4">Memory Game</h1>
+      <div id="game-board" class="row justify-content-center">
+        <!-- Card elements will go here -->
+      </div>
+      <p id="message" class="text-center mt-3"></p>
+      <div class="text-center">
+        <button id="reset-btn" class="btn btn-primary mt-3 invisible">Play Again</button>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

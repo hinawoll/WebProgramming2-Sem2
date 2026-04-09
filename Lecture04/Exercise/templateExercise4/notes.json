@@ -1,0 +1,8 @@
+{
+    "songs": [
+        {
+            "name": "Simple Melody",
+            "notes": ["C", "D", "E", "F", "G", "A", "B", "C"]
+        }
+    ]
+}

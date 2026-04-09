@@ -7,46 +7,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+    <script src="dist/script.js" defer></script>
 </head>
 <body>
     <div class="container text-center my-5">
         <h1>Virtual Piano</h1>
         <p>Press the following keys to play the notes:</p>
+
         <ul class="list-inline">
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>A</strong> - C
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>S</strong> - D
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>D</strong> - E
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>F</strong> - F
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>G</strong> - G
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>H</strong> - A
-            </li>
-            <li class="list-inline-item key-spacing">
-                <i class="bi bi-keyboard"></i> <strong>J</strong> - B
-            </li>
+            <li class="list-inline-item"><strong>A</strong> - C</li>
+            <li class="list-inline-item"><strong>S</strong> - D</li>
+            <li class="list-inline-item"><strong>D</strong> - E</li>
+            <li class="list-inline-item"><strong>F</strong> - F</li>
+            <li class="list-inline-item"><strong>G</strong> - G</li>
+            <li class="list-inline-item"><strong>H</strong> - A</li>
+            <li class="list-inline-item"><strong>J</strong> - B</li>
         </ul>
-        <div id="piano" class="d-flex justify-content-center">
-            <!-- Piano keys with IDs for JavaScript interaction -->
-            <div class="key" id="keyC">C</div>
-            <div class="key" id="keyD">D</div>
-            <div class="key" id="keyE">E</div>
-            <div class="key" id="keyF">F</div>
-            <div class="key" id="keyG">G</div>
-            <div class="key" id="keyA">A</div>
-            <div class="key" id="keyB">B</div>
+
+        <div id="piano" class="d-flex justify-content-center mb-4">
+            <div class="key" id="keyC" data-note="C">C</div>
+            <div class="key" id="keyD" data-note="D">D</div>
+            <div class="key" id="keyE" data-note="E">E</div>
+            <div class="key" id="keyF" data-note="F">F</div>
+            <div class="key" id="keyG" data-note="G">G</div>
+            <div class="key" id="keyA" data-note="A">A</div>
+            <div class="key" id="keyB" data-note="B">B</div>
         </div>
-        <button id="reset-notes" class="btn btn-danger mt-2">Reset Note Line</button>
+
+        <h3>Loaded Note Sequence</h3>
+        <div id="noteSequence" class="mb-4"></div>
+
+        <div class="mb-3">
+            <button id="playBtn" class="btn btn-success mx-1">Play</button>
+            <button id="pauseBtn" class="btn btn-warning mx-1">Pause</button>
+            <button id="resetBtn" class="btn btn-danger mx-1">Reset</button>
+        </div>
+
+        <p>
+            Extra shortcuts:
+            <strong>Space</strong> = Play/Pause,
+            <strong>R</strong> = Reset
+        </p>
     </div>
-    <script src="dist/script.js"></script>
 </body>
 </html>

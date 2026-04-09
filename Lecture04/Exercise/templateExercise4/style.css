@@ -1,0 +1,22 @@
+.key {
+    width: 70px;
+    height: 180px;
+    border: 1px solid black;
+    margin: 2px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    padding-bottom: 10px;
+}
+
+.key.active {
+    background-color: gold;
+}
+
+.current-note {
+    background-color: lightblue !important;
+}
