@@ -81,6 +81,7 @@ This makes the function reusable for different data types.
 
 The logic is divided into clear functions:
 
+* createDeck()
 * startGame()
 * clearGame()
 * renderBoard()
