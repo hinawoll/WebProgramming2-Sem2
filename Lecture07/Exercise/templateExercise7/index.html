@@ -15,20 +15,24 @@
       <h1 class="text-center my-4">Memory Game</h1>
       <div class="row justify-content-center my-4">
         <div class="d-flex align-items-center">
-
           <select id="pair-count" class="form-control mr-2">
+            <option value="2">2 pairs</option>
             <option value="4">4 pairs</option>
             <option value="6">6 pairs</option>
             <option value="8">8 pairs</option>
           </select>
           <button id="start-btn" class="btn btn-primary">Start</button>
-          <button id="reset-btn" class="btn btn-secondary ml-2">Reset</button>
+          <button id="reset-btn" class="btn btn-secondary ml-2 invisible">
+            Reset
+          </button>
         </div>
       </div>
 
       <div id="game-board" class="row justify-content-center"></div>
       <div id="score-board" class="row justify-content-center my-4"></div>
-      <p id="message"></p>
+      <div class="message-wrapper">
+        <p id="message"></p>
+      </div>
     </div>
     <script type="module" src="dist/index.js"></script>
   </body>

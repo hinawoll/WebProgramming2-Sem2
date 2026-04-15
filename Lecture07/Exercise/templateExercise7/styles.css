@@ -35,10 +35,42 @@ body {
   transform: scale(1.05);
 }
 
+
+#score-board {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-box {
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: transparent;
+  font-weight: normal;
+}
+
 .active-player {
   font-weight: bold;
-  border: 2px solid #007bff;
-  padding: 8px 12px;
-  border-radius: 8px;
+  border-color: #007bff;
   background-color: #e9f3ff;
+}
+
+.message-wrapper {
+  text-align: center;
+}
+
+#message {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 10px;
+  background-color: #f1f3f5;
+  display: inline-block;
+}
+
+#message:empty {
+  display: none; /* wenn keine Nachricht existiert, wird das nicht gezeigt */
 }

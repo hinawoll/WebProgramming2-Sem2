@@ -1,5 +1,3 @@
-import { NumericLiteral } from "../../../../../../../../node_modules/typescript/lib/typescript";
-
 //Array mit Symbolen
 const ALL_SYMBOLS: string[] = ["🍎", "🍋", "🍇", "🍍", "🍉", "🥝", "🍒", "🍌"];
 
@@ -18,11 +16,6 @@ interface Player {
   score: number;
 }
 
-enum TurnResult {
-  Match = "MATCH",
-  NoMatch = "NO_MATCH",
-}
-
 //Array für die Karten (nur für CardData-Typ Objekte)
 let cards: CardData[] = [];
 //Array für aufgedeckte Karten.
@@ -37,6 +30,7 @@ let players: Player[] = [
   { id: 2, name: "Player 2", score: 0 },
 ];
 
+//DOM Type Safety, um Raufzeitsfehler zu vermeiden
 const scoreBoard = document.getElementById("score-board") as HTMLDivElement;
 const message = document.getElementById("message") as HTMLParagraphElement;
 const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
@@ -53,18 +47,6 @@ const pairCountSelect = document.getElementById(
 ) as HTMLSelectElement;
 const startBtn = document.getElementById("start-btn") as HTMLButtonElement;
 
-//da value immer string ist, muss es zu Anzahl geändert werden
-//wenn da 6 ausgewählt wird, wird pairCount 6.
-const pairCount = Number(pairCountSelect.value);
-cards = createDeck(pairCount);
-renderBoard();
-
-//Player wechseln
-function switchPlayer(): void {
-  currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-  renderScoreBoard();
-}
-
 //ein Array mischen durch generic
 function shuffle<T>(array: T[]): T[] {
   const copy = [...array];
@@ -75,6 +57,7 @@ function shuffle<T>(array: T[]): T[] {
   return copy;
 }
 
+//erstellen die Daten der Karten
 function createDeck(pairCount: number): CardData[] {
   const selectedSymbols = ALL_SYMBOLS.slice(0, pairCount);
   const deckSymbols = shuffle([...selectedSymbols, ...selectedSymbols]);
@@ -87,7 +70,45 @@ function createDeck(pairCount: number): CardData[] {
   }));
 }
 
-//Karten erstellen
+function startGame(): void {
+  const pairCount = Number(pairCountSelect.value);
+  cards = createDeck(pairCount);
+
+  flippedCards = [];
+  matchedPairs = 0;
+  lockBoard = false;
+  currentPlayerIndex = 0;
+
+  players = [
+    { id: 1, name: "Player 1", score: 0 },
+    { id: 2, name: "Player 2", score: 0 },
+  ];
+
+  message.textContent = "";
+
+  renderBoard();
+  renderScoreBoard();
+}
+
+function clearGame(): void {
+  cards = [];
+  flippedCards = [];
+  matchedPairs = 0;
+  lockBoard = false;
+  currentPlayerIndex = 0;
+
+  players = [
+    { id: 1, name: "Player 1", score: 0 },
+    { id: 2, name: "Player 2", score: 0 },
+  ];
+
+  message.textContent = "";
+
+  renderBoard();
+  renderScoreBoard();
+}
+
+//die Karten sichtbar machen
 function renderBoard(): void {
   //der Inhalt in gameBoard wird gelöscht.
   gameBoard.innerHTML = "";
@@ -111,7 +132,18 @@ function renderBoard(): void {
   });
 }
 
-//eine Funktion zum Umdrehen einer Karte.
+function renderScoreBoard(): void {
+  scoreBoard.innerHTML = players
+    .map(
+      (player, index) => `
+        <div class="player-box ${index === currentPlayerIndex ? "active-player" : ""}">
+          ${player.name}: ${player.score}
+        </div>
+      `,
+    )
+    .join("");
+}
+
 function flipCard(cardId: number): void {
   //Wenn das gameBoard gerade gesperrt ist, passiert nichts.
   if (lockBoard) return;
@@ -132,7 +164,6 @@ function flipCard(cardId: number): void {
   }
 }
 
-//Funktion zum Vergleichen der Karten
 function checkIfMatch(): void {
   //Zwei Karten aus dem Array holen
   const firstCard = flippedCards[0];
@@ -148,11 +179,12 @@ function checkIfMatch(): void {
     flippedCards = [];
 
     players[currentPlayerIndex].score++;
+    renderScoreBoard();
+    renderBoard();
 
     //wenn alle Paare aufgedeckt wurden
     if (matchedPairs === cards.length / 2) {
       showEndGameMessage();
-      resetBtn.classList.remove("invisible");
     }
   } else {
     //Falls 1. und 2.Karte nicht gleich sind
@@ -174,57 +206,40 @@ function checkIfMatch(): void {
   }
 }
 
-function renderScoreBoard(): void {
-  scoreBoard.innerHTML = players
-    .map(
-      (player, index) => `
-        <div class="${index === currentPlayerIndex ? "active-player" : ""}">
-          ${player.name}: ${player.score}
-        </div>
-      `
-    )
-    .join("");
-}
-
-
-function resetGame() : void {
-  const pairCount = Number(pairCountSelect.value);
-  cards = createDeck(pairCount);
-
-  flippedCards = [];
-  matchedPairs = 0;
-  lockBoard = false;
-  currentPlayerIndex = 0;
-
-  players = [
-    { id: 1, name: "Player 1", score: 0 },
-    { id: 2, name: "Player 2", score: 0 }
-  ];
-
-  message.textContent = "";
-  resetBtn.classList.add("invisible");
-
-  renderBoard();
+function switchPlayer(): void {
+  currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
   renderScoreBoard();
 }
-
-startBtn.addEventListener("click", resetGame);
-
-resetBtn.addEventListener("click", () => {
-  resetGame();
-  resetBtn.classList.add("invisible");
-});
-
-shuffle(ALL_SYMBOLS);
-renderBoard();
 
 function showEndGameMessage(): void {
   const maxScore = Math.max(...players.map((p) => p.score));
   const winners = players.filter((p) => p.score === maxScore);
 
   if (winners.length === 1) {
-    message.textContent = `${winners[0].name} wins with ${winners[0].score} points!`;
+    message.innerHTML = `
+${winners[0].name} wins with ${winners[0].score} points!<br>
+Final Scores:<br>
+Player 1: ${players[0].score}<br>
+Player 2: ${players[1].score}
+`;
   } else {
     message.textContent = `It's a draw! Score: ${maxScore}`;
   }
 }
+
+
+
+
+renderScoreBoard();
+
+startBtn.addEventListener("click", () => {
+  startGame();
+  startBtn.classList.add("invisible");
+  resetBtn.classList.remove("invisible");
+});
+
+resetBtn.addEventListener("click", () => {
+  startBtn.classList.remove("invisible");
+  resetBtn.classList.add("invisible");
+  clearGame();
+});
