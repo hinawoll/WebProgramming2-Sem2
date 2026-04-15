@@ -77,7 +77,7 @@ This makes the function reusable for different data types.
 
 ---
 
-### Modular Functions
+### Functions
 
 The logic is divided into clear functions:
 
@@ -118,52 +118,3 @@ This avoids runtime errors and improves developer experience.
   * Final scores of both players
 
 ---
-
-## Technologies Used
-
-* TypeScript
-* HTML5
-* CSS3
-* Bootstrap 4
-
----
-
-## Additional Notes
-
-* The `invisible` class is provided by Bootstrap and does not need to be defined manually.
-* The game board is dynamically rendered based on the selected pair count.
-* The game state is reset using a dedicated reset function.
-
----
-
-## Possible Improvements
-
-* Introduce an enum for game states or turn results
-* Allow custom player names
-* Improve mobile responsiveness
-* Add sound effects
-* Split code into multiple TypeScript files
-
----
-
-## How to Run
-
-1. Compile the TypeScript code:
-
-   ```
-   npx tsc
-   ```
-
-2. Make sure the compiled file exists:
-
-   ```
-   dist/index.js
-   ```
-
-3. Open `index.html` in your browser
-
----
-
-## Author
-
-Student project – Week 7: Memory Game Refactoring
